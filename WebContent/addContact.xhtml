@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:f="http://java.sun.com/jsf/core"    
+   xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<f:view locale="#{Language.l}" ></f:view>
+	<link href="css/style.css" rel="stylesheet" type="text/css"/>
+	<script type="text/javascript" src="scripts/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="scripts/lib.main.js"></script>
+	<title>#{msgs.addContact}</title>
+</h:head>
+<h:body>
+	<ul id="btnMenuHeader">
+		<li><h:link value="#{msgs.home}" outcome="index" /></li>
+		<li><h:form><h:commandLink value="#{msgs.addInstances}" action="#{AddDataInstancesAccess.check}" /></h:form></li>
+		<li><h:link value="#{msgs.addGroup}" outcome="addGroup" /></li>
+		<li><h:form><h:commandLink value="#{msgs.showGroups}" action="#{GetListGroupAccess.check}" /></h:form></li>
+		<li><h:link value="#{msgs.language}" outcome="language" /></li>
+	</ul>
+	<div class="page">
+		<h1>#{msgs.addContact}</h1>
+		<h:messages styleClass="error" />
+		<h:form id="form">
+			<table>
+				<tr>
+					<td>
+						<label>#{msgs.firstName}:</label>
+						<h:inputText name="firstName" value="#{AddDataAccess.firstName}" required="true" requiredMessage="Le nom est requis" />
+					</td>
+					<td>
+						<label>#{msgs.lastName}:</label>
+						<h:inputText name="lastName" value="#{AddDataAccess.lastName}"  />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<label>#{msgs.email}:</label>
+						<h:inputText name="email" value="#{AddDataAccess.email}"  />
+					</td>
+				</tr>
+				
+				<tr>
+					<td>
+						<label>#{msgs.street}:</label>
+						 <h:inputText name="street" value="#{AddDataAccess.street}"  />
+					</td>
+					<td>
+						<label>#{msgs.city}:</label>
+						<h:inputText name="city" value="#{AddDataAccess.city}" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label>#{msgs.zip}:</label>
+						<h:inputText label="zip" name="zip" value="#{AddDataAccess.zip}" >
+							<f:convertNumber integerOnly="true" type="number" />
+						</h:inputText>
+					</td>
+					<td>
+						<label>#{msgs.country}:</label>
+						<h:inputText name="country" value="#{AddDataAccess.country}"  />
+					</td>
+				</tr>		
+				<tr>
+			 		<td>
+						<label>Tel. Mobile:</label>
+						<h:inputText name="mobile" label="Tel. Mobile" value="#{AddDataAccess.mobile}" >
+							<f:convertNumber integerOnly="true" type="number" />
+						</h:inputText>
+					</td> 
+					<td>
+						<label>Tel. Home:</label>
+						<h:inputText name="home" label="Tel. Home" value="#{AddDataAccess.home}" >
+							<f:convertNumber integerOnly="true" type="number" />
+						</h:inputText>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<label>Tel. Office:</label>
+						<h:inputText name="office" label="Tel. Office" value="#{AddDataAccess.office}" >
+							<f:convertNumber integerOnly="true" type="number" />
+						</h:inputText>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<label>SIRET:</label>
+						<h:inputText name="numSiret" label="Siret" value="#{AddDataAccess.numSiret}" >
+							<f:convertNumber integerOnly="true" type="number" />
+						</h:inputText>
+					</td>
+				</tr>
+			</table>
+			<hr/>
+			<h:commandButton value="#{msgs.validate}" action="#{AddDataAccess.check}" />
+			<h:commandButton value="#{msgs.reset}" type="reset" />
+		</h:form>
+	</div>
+</h:body>
+</html>

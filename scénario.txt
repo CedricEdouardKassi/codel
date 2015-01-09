@@ -1,0 +1,37 @@
+CODEL
+Cédric KASSI 3303968
+Mathieu LABAR 2900641
+--------------------------------------------------------------
+SCENARIO :
+
+-- HIBERNATE --
+
+M1. Création d'une entreprise (héritage) 
+C2. Création d'un contact
+M3. Insertion des instances de contacts "Cedric"(getter & setter) & "Mathieu" (Constructor)
+C4. Modification d'un contact
+M5. Ajout de trois groupes "IAD", "SAR", "STL"
+C6. Test de l'insertion d'un deuxième groupe "STL" pour afficher une erreur de duplicattion
+M7. Suppression du groupe "IAD"
+C8. Affichage des groupes
+M9. Ajouter un groupe dans un contact
+C10. Suppression d'un groupe dans un contact
+M11. Recherche par nom du contact "Cédric" avec la requête paramétré
+C12. Modification d'un contact (Conccurence/Versionning)
+C13. Gestion du cache de second niveau
+M14. Affichage de l'interface en anglais (Internationalisation)
+M15. Gestion des logs dans le fichier c:/logs/jsfapp.log
+
+-- SPRING --
+
+C16. Aspect sur la récupération du nom d'un contact
+M17. Injection de dépendance (DAOContact)
+C18. Session factory
+
+-- JSF --
+
+M19. MVC 
+C20. Validation du type int du siret (Options de validation)
+
+-- Others --
+M21. Readme d'installation

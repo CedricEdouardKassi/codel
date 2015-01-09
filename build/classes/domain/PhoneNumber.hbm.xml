@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="domain">
+  <class name="PhoneNumber" table="PhoneNumber_Table">
+  	<cache usage="read-write" />
+  	<id name="id" type="long" column="ID_PHONENUMBER" >
+  		<generator class="increment"/>
+	</id>
+	<timestamp name="version" access="field" />
+	<property name="phoneKind" type="string" />
+	<property name="phoneNumber" type="string" />
+	<many-to-one name="contact" class="Contact" column="ID_CONTACT" not-null="true" optimistic-lock="false" ></many-to-one>
+  </class>
+</hibernate-mapping>

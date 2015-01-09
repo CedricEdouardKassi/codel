@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:f="http://java.sun.com/jsf/core"    
+   xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<f:view locale="#{Language.l}" ></f:view>
+	<link href="css/style.css" rel="stylesheet" type="text/css"/>
+	<title>#{msgs.language}</title>
+</h:head>
+<h:body>
+	<ul id="btnMenuHeader">
+		<li><h:link value="#{msgs.home}" outcome="index" /></li>
+	</ul>
+	<div class="page">
+		<h1>#{msgs.language}</h1>
+		<h:form>
+     		<label>Select language:</label>
+            <h:selectOneMenu id="dropdown" value="#{Language.language}">
+                  <f:selectItem itemValue="en" itemLabel="English" />
+                  <f:selectItem itemValue="fr" itemLabel="French" />
+            </h:selectOneMenu>
+			<hr/>
+			<h:commandButton value="#{msgs.validate}" action="#{Language.change}" />
+			<h:commandButton value="#{msgs.reset}" type="reset" />
+		</h:form>
+	</div>
+</h:body>
+</html>

@@ -1,0 +1,213 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700);
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700,400italic,300italic);
+
+html, body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: middle;
+    font-family:Tahoma;
+}
+h1 {
+	color: #151515;
+	margin-bottom: 12px;
+	font: normal 35px/38px Open Sans;
+	line-height: 45px;
+	font-weight: 300;
+	text-shadow: 1px 1px 0px rgba(128,95,12,0.11);
+}
+label{
+    display:block;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:13px;
+    color:#333;
+}
+form input[type=text] {
+    width:300px;
+}
+form textarea {
+    width:90%;
+    height:100px;
+}
+input[type=text], select, textarea{
+    display:block;
+    border:1px solid #E0E0E0;
+    background-color:#FBFBFB;
+    padding:7px;
+    margin:5px 0px 5px 0px;
+    color:#666;
+    -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+    -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+    -ms-transition: border linear 0.2s, box-shadow linear 0.2s;
+    -o-transition: border linear 0.2s, box-shadow linear 0.2s;
+    transition: border linear 0.2s, box-shadow linear 0.2s;
+}
+input[type=text]:focus, select:focus, textarea:focus{
+    border-color: rgba(82, 168, 236, 0.8);
+}
+
+form input[type="submit"],form input[type="reset"], .button{
+    background-position:left 1px;
+    background-repeat:repeat-x;
+    width:140px;
+    font-size:13px;
+    font-family:Tahoma;
+    color:#FFF;
+    text-align:center;
+    padding:8px 0px 8px 0px;
+    cursor:pointer;
+    border:none;
+	-webkit-transition: all .2s linear; 
+	-moz-transition: all .2s linear; 
+	-o-transition: all .2s linear; 
+	-ms-transition: all .2s linear; 
+	transition: all .2s linear;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+form input[type="submit"]{
+    background-color:#009900;
+}
+form input[type="submit"]:hover{
+	background-color:#02DB02;
+}
+form input[type="reset"]{
+    background-color:#990000;
+    margin-left:5px;
+}
+form input[type="reset"]:hover{
+	background-color:#D60000 !important;
+}
+.button {
+	text-decoration:none;
+	display:block;
+	background-color: #F60;
+}
+.button:hover {
+	background-color: #FC0;
+}
+.actionModify{
+	background-color:#005599 !important;
+}
+.actionModify:hover{
+	background-color:#0055EE !important;
+}
+.actionDelete{
+	background-color:#D60000 !important;
+}
+.actionDelete:hover{
+	background-color:#E60000 !important;
+}
+ul {
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+}
+table {
+	font: 14px Arial, "Helvetica Neue", Helvetica, sans-serif;
+    border-collapse:collapse;
+    width: 100%;
+    background-color: #FFF;
+}
+table th {
+	text-align: left;
+}
+table, td, th {
+}
+table td:first-letter, table th:first-letter {
+    text-transform: uppercase;
+}
+table th, table td {
+    padding:8px;
+}
+table tr:nth-child(2n+2){
+    background-color: #FFFAD4;
+}
+hr {
+    width: 100%;
+    margin: 20px auto;
+    border: 0;
+    border-top: 5px solid #eee;
+    box-sizing: content-box;
+    height: 0;
+    display: block;
+}
+hr:before, hr:after{
+    clear: both;
+}
+hr:before, hr:after{
+    clear: both;
+}
+
+.succes, .error{
+	color:#FFF;
+	font-family:Verdana;
+	font-size:14px;
+	padding:2% 2% 2% 2%;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+}
+.succes{
+	background-color:#6C0;
+}
+.succes a{
+	color:#FFF;
+}
+.succes a:hover{
+	color:#FFF;
+	text-decoration:none;
+}
+.error{
+	background-color:#F00;
+}
+.error a{
+	color:#FF6600;
+}
+.error a:hover{
+	color:#FF6600;
+	text-decoration:none;
+}
+.page {
+	padding: 20px;
+}
+#btnMenuHeader li{
+	text-align: center;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: inline-block;
+	width: 100%;
+	box-sizing: border-box;
+	border-right: 1px solid #50BFE9;
+}
+#btnMenuHeader a{
+	color: #FFF;
+	text-decoration: none;
+	width: 100%;
+	display: block;
+	padding: 15px 0px;
+	background-color: #33B5E5;
+	font-family: 'Open Sans',Helvetica,Arial,sans-serif;
+	font-size: 15px;
+	line-height: 20px;
+	-webkit-transition: all .2s linear; 
+	-moz-transition: all .2s linear; 
+	-o-transition: all .2s linear; 
+	-ms-transition: all .2s linear; 
+	transition: all .2s linear;
+}
+#btnMenuHeader a:hover{
+	background-color: #50BFE9;
+}
+#search {
+	padding: 4px;
+	background-color: #EEEEEE;
+}
+#search input, #search select{
+	display: inline-block;
+}

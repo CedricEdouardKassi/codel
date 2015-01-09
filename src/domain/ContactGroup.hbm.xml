@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="domain">
+  <class name="ContactGroup" table="ContactGroup_Table">
+  	<cache usage="read-write" />
+  	<id name="groupId" type="long" column="ID_CONTACTGROUP" >
+  		<generator class="increment"/>
+	</id>
+	<timestamp name="version" access="field" />
+	<property name="groupName" unique="true" type="string" />
+	<set name="contacts" cascade="save-update" lazy="false">
+            <key column="ID_CONTACTGROUP" />
+            <many-to-many class="Contact"/>
+    </set>
+  </class>
+</hibernate-mapping>

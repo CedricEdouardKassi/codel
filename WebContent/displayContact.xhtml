@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:f="http://java.sun.com/jsf/core"    
+   xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<f:view locale="#{Language.l}" ></f:view>
+	<link href="css/style.css" rel="stylesheet" type="text/css"/>
+	<title>#{msgs.displayContact}</title>
+</h:head>
+<h:body>
+	<ul id="btnMenuHeader">
+		<li><h:link value="#{msgs.home}" outcome="index" /></li>
+		<li><h:form><h:commandLink value="#{msgs.addInstances}" action="#{AddDataInstancesAccess.check}" /></h:form></li>
+		<li><h:link value="#{msgs.addGroup}" outcome="addGroup" /></li>
+		<li><h:form><h:commandLink value="#{msgs.showGroups}" action="#{GetListGroupAccess.check}" /></h:form></li>
+		<li><h:link value="#{msgs.language}" outcome="language" /></li>
+	</ul>
+	<div class="page">
+		<h1>#{msgs.displayContact}</h1>
+		<h:messages styleClass="error" />
+		<h:form name="Informations Contact">
+			<h:inputHidden name="id" readonly="true" value="#{DisplayDataAccess.c.id}" />
+			<table>
+				<tr>
+					<td>
+						<label>#{msgs.firstName}:</label>
+						<h:inputText name="firstName" readonly="true" value="#{DisplayDataAccess.c.firstName}" required="true" requiredMessage="Le nom est requis" />
+					</td>
+					<td>
+						<label>#{msgs.lastName}:</label>
+						<h:inputText name="lastName" readonly="true" value="#{DisplayDataAccess.c.lastName}" />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<label>#{msgs.email}:</label>
+						<h:inputText name="email" readonly="true" value="#{DisplayDataAccess.c.email}" />
+					</td>
+				</tr>
+				
+				<tr>
+					<td>
+						<label>#{msgs.street}:</label>
+						 <h:inputText name="street" readonly="true" value="#{DisplayDataAccess.c.address.street}" />
+					</td>
+					<td>
+						<label>#{msgs.city}:</label>
+						<h:inputText name="city" readonly="true" value="#{DisplayDataAccess.c.address.city}" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label>#{msgs.zip}:</label>
+						<h:inputText name="zip" readonly="true" value="#{DisplayDataAccess.c.address.zip}" label="Zip" >
+							<f:convertNumber integerOnly="true" type="number" />
+						</h:inputText>
+					</td>
+					<td>
+						<label>#{msgs.country}:</label>
+						<h:inputText name="country" readonly="true" value="#{DisplayDataAccess.c.address.country}" />
+					</td>
+				</tr>		
+				<tr>
+			 		<td>
+						<label>Tel. Mobile:</label>
+						<h:inputText name="mobile" readonly="true" value="#{DisplayDataAccess.telMobile}" label="Tel. Mobile">
+							<f:convertNumber integerOnly="true" type="number" />
+						</h:inputText>
+					</td> 
+					<td>
+						<label>Tel. Home:</label>
+						<h:inputText name="home" readonly="true" value="#{DisplayDataAccess.telHome}" label="Tel. Home">
+							<f:convertNumber integerOnly="true" type="number" />
+						</h:inputText>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<label>Tel. Office:</label>
+						<h:inputText name="office" readonly="true"  value="#{DisplayDataAccess.telOffice}" label="Tel. Office">
+							<f:convertNumber integerOnly="true" type="number" />
+						</h:inputText>
+					</td>
+				</tr>
+				<h:panelGroup rendered="#{not empty DisplayDataAccess.siret}">
+					<tr>
+						<td colspan="2">
+							<label>SIRET:</label>
+							<h:inputText name="numSiret" readonly="true" label="SIRET" value="#{DisplayDataAccess.siret}" >
+								<f:convertNumber integerOnly="true" type="number" />
+							</h:inputText>
+						</td>
+					</tr>
+				</h:panelGroup>
+			</table>
+			<hr/>
+		</h:form>
+		<hr/>
+		
+		<h1>#{msgs.myGroups}</h1>
+		<h:dataTable value="#{DisplayDataAccess.c.getBooksArray()}" var="group" >
+		   <h:column>
+		   	#{group.groupName}
+		   </h:column>
+		</h:dataTable>
+		<h:outputText escape="false" value="&lt;div class='error'&gt;Le contact est dans aucun groupe. &lt;/div&gt;" rendered="#{DisplayDataAccess.c.getBooksArray().isEmpty()}"></h:outputText>
+		
+	</div>
+</h:body>
+</html>

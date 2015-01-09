@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:f="http://java.sun.com/jsf/core"    
+   xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<f:view locale="#{Language.l}" ></f:view>
+	<link href="css/style.css" rel="stylesheet" type="text/css"/>
+	<title>#{msgs.modifyContact}</title>
+</h:head>
+<h:body>
+	<ul id="btnMenuHeader">
+		<li><h:link value="#{msgs.home}" outcome="index" /></li>
+		<li><h:form><h:commandLink value="#{msgs.addInstances}" action="#{AddDataInstancesAccess.check}" /></h:form></li>
+		<li><h:link value="#{msgs.addGroup}" outcome="addGroup" /></li>
+		<li><h:form><h:commandLink value="#{msgs.showGroups}" action="#{GetListGroupAccess.check}" /></h:form></li>
+		<li><h:link value="#{msgs.language}" outcome="language" /></li>
+	</ul>
+	<div class="page">
+		<h1>#{msgs.modifyContact}</h1>
+		<h:messages styleClass="error" />
+		<h:form name="Ajout Contact">
+			<h:inputHidden name="id" value="#{ModifyDataAccess.c.id}" />
+			<table>
+				<tr>
+					<td>
+						<label>#{msgs.firstName}:</label>
+						<h:inputText name="firstName" value="#{ModifyDataAccess.c.firstName}" required="true" requiredMessage="Le nom est requis" />
+					</td>
+					<td>
+						<label>#{msgs.lastName}:</label>
+						<h:inputText name="lastName" value="#{ModifyDataAccess.c.lastName}" />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<label>#{msgs.email}:</label>
+						<h:inputText name="email" value="#{ModifyDataAccess.c.email}" />
+					</td>
+				</tr>
+				
+				<tr>
+					<td>
+						<label>#{msgs.street}:</label>
+						 <h:inputText name="street" value="#{ModifyDataAccess.c.address.street}" />
+					</td>
+					<td>
+						<label>#{msgs.city}:</label>
+						<h:inputText name="city" value="#{ModifyDataAccess.c.address.city}" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label>#{msgs.zip}:</label>
+						<h:inputText name="zip" value="#{ModifyDataAccess.c.address.zip}" label="Zip" >
+							<f:convertNumber integerOnly="true" type="number" />
+						</h:inputText>
+					</td>
+					<td>
+						<label>#{msgs.country}:</label>
+						<h:inputText name="country" value="#{ModifyDataAccess.c.address.country}" />
+					</td>
+				</tr>		
+				<tr>
+			 		<td>
+						<label>Tel. Mobile:</label>
+						<h:inputText name="mobile" value="#{ModifyDataAccess.telMobile}" label="Tel. Mobile">
+							<f:convertNumber integerOnly="true" type="number" />
+						</h:inputText>
+					</td> 
+					<td>
+						<label>Tel. Home:</label>
+						<h:inputText name="home" value="#{ModifyDataAccess.telHome}" label="Tel. Home">
+							<f:convertNumber integerOnly="true" type="number" />
+						</h:inputText>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<label>Tel. Office:</label>
+						<h:inputText name="office"  value="#{ModifyDataAccess.telOffice}" label="Tel. Office">
+							<f:convertNumber integerOnly="true" type="number" />
+						</h:inputText>
+					</td>
+				</tr>
+				<h:panelGroup rendered="#{not empty ModifyDataAccess.siret}">
+					<tr>
+						<td colspan="2">
+							<label>SIRET:</label>
+							<h:inputText name="numSiret" label="SIRET" value="#{ModifyDataAccess.siret}" >
+								<f:convertNumber integerOnly="true" type="number" />
+							</h:inputText>
+						</td>
+					</tr>
+				</h:panelGroup>
+			</table>
+			<hr/>
+			<h:commandButton value="#{msgs.validate}" action="#{ModifyDataAccess.modify}" />
+			<h:commandButton value="#{msgs.reset}" type="reset" />
+		</h:form>
+		<hr/>
+		
+		<h1>#{msgs.myGroups}</h1>
+		<h:dataTable value="#{ModifyDataAccess.c.getBooksArray()}" var="group" >
+		   <h:column>
+		   	#{group.groupName}
+		   </h:column>
+		   <h:column>
+		   		<h:form>
+		   			<h:commandButton styleClass="actionDelete" value="#{msgs.delete}" action="#{DeleteContactGroupDataAccess.check()}" >
+		   				<f:param name="idcontact" value="#{ModifyDataAccess.c.id}"/>
+		   				<f:param name="idgroup" value="#{group.groupId}"/>
+		   			</h:commandButton>
+		   		</h:form>
+		   </h:column>
+		</h:dataTable>
+		<h:outputText escape="false" value="&lt;div class='error'&gt;Le contact est dans aucun groupe. &lt;/div&gt;" rendered="#{ModifyDataAccess.c.getBooksArray().isEmpty()}"></h:outputText>
+		
+		<h1>#{msgs.addGroup}</h1>
+		<h:dataTable value="#{ModifyDataAccess.getBooksArrayNotIn(ModifyDataAccess.c.id)}" var="group" >
+		   <h:column>
+		   	#{group.groupName}
+		   </h:column>
+		   <h:column>
+		   		<h:form>
+		   			<h:commandButton value="#{msgs.add}" action="#{AddContactGroupDataAccess.check()}" >
+		   				<f:param name="idcontact" value="#{ModifyDataAccess.c.id}"/>
+		   				<f:param name="idgroup" value="#{group.groupId}"/>
+		   			</h:commandButton>
+		   		</h:form>
+		   </h:column>
+		</h:dataTable>
+		<h:outputText escape="false" value="&lt;div class='error'&gt;Pas de groupe disponible. &lt;/div&gt;" rendered="#{ModifyDataAccess.getBooksArrayNotIn(ModifyDataAccess.c.id).isEmpty()}"></h:outputText>
+	</div>
+</h:body>
+</html>

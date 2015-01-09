@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="domain">
+  <class name="Entreprise" table="Entreprise_Table">
+  	<cache usage="read-write" />
+  	<id name="id" type="long" column="ID_ENTREPRISE" >
+  		<generator class="increment"/>
+	</id>
+	<property name="numSiret" type="integer" />
+  </class>
+</hibernate-mapping>

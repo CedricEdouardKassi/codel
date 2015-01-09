@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:f="http://java.sun.com/jsf/core"    
+   xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<f:view locale="#{Language.l}" ></f:view>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<link href="css/style.css" rel="stylesheet" type="text/css"/>
+	<title>#{msgs.showGroups}</title>
+</h:head>
+<h:body>
+	<ul id="btnMenuHeader">
+		<li><h:link value="#{msgs.home}" outcome="index" /></li>
+	</ul>
+	<div class="page">
+		<h1>#{msgs.showGroups}</h1>
+		<h:dataTable value="#{GetListGroupAccess.cg}" var="group" >
+		   <h:column>
+		   		<f:facet name="header">ID</f:facet>
+		   		#{group.groupId}
+		   </h:column>
+		   <h:column>
+		   		<f:facet name="header">#{msgs.groupName}</f:facet>
+		   		#{group.groupName}
+		   </h:column>
+		   <h:column>
+		   		<f:facet name="header">#{msgs.delete}</f:facet>
+		   		<h:form>
+		   			<h:commandButton styleClass="actionDelete" value="#{msgs.delete}" action="#{DeleteGroupDataAccess.check()}" >
+		   				<f:param name="idgroup" value="#{group.groupId}"/>
+		   			</h:commandButton>
+		   		</h:form>
+		   </h:column>
+		</h:dataTable>
+		<h:outputText escape="false" value="&lt;div class='error'&gt;Il y a aucun groupe. &lt;/div&gt;" rendered="#{GetListGroupAccess.cg.isEmpty()}"></h:outputText>
+	</div>
+</h:body>
+</html>

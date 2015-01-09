@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/context/spring-context-2.5.xsd http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/tx/spring-tx.xsd">
+		
+	<!-- Construction des deux contacts -->
+	<bean id="contact1" class="domain.Contact" >
+		<property name="firstName" value="Cedric" />
+		<property name="lastName" value="TOTO" />
+		<property name="email" value="Cedric.toto@gmail.com" />
+		<property name="address"><ref bean="address1" /></property>
+		<property name="phones">
+			<set>
+				<ref bean="phone1" />
+			</set>
+		</property>
+		<property name="books">
+			<set>
+				<ref bean="group1" />
+			</set>
+		</property>
+	</bean>
+	<bean id="group1" class="domain.ContactGroup" >
+		<property name="groupName" value="UnGroup" />
+		<property name="contacts">
+			<set>
+				<ref bean="contact1" />
+			</set>
+		</property>
+	</bean>
+	<bean id="address1" class="domain.Address" >
+		<property name="street" value="Rue jussieu" />
+		<property name="city" value="Paris" />
+		<property name="zip" value="98562" />
+		<property name="country" value="France" />
+	</bean>
+	<bean id="phone1" class="domain.PhoneNumber" >
+		<property name="phoneKind" value="home" />
+		<property name="phoneNumber" value="078945217" />
+		<property name="contact" ><ref bean="contact1" /></property>
+	</bean> 
+
+	<bean id="group2" class="domain.ContactGroup">
+		<constructor-arg value="Amis" />
+		<constructor-arg>
+			<set>
+				<ref bean="contact1" /> 
+			</set>
+		</constructor-arg>
+	</bean>
+	<bean id="phone2" class="domain.PhoneNumber">
+		<constructor-arg value="mobile"/>
+		<constructor-arg value="064895357"/>
+		<constructor-arg ref="contact1"/>
+	</bean>
+	<bean id="address2" class="domain.Address">
+		<constructor-arg value="12 BD Des Ulysses"/>
+		<constructor-arg value="Paris"/>
+		<constructor-arg value="92400"/>
+		<constructor-arg value="France"/>
+	</bean>
+	<bean id="contact2" class="domain.Contact">
+		<constructor-arg value="Mathieu"/>
+		<constructor-arg value="Lab"/>
+		<constructor-arg value="mathieu.lab@hotmail.com"/>
+		<constructor-arg ref="address2"/>
+		<constructor-arg>
+			<set>
+				<ref bean="phone2" />
+			</set>
+		</constructor-arg>
+		<constructor-arg>
+			<set>
+				<ref bean="group2" />
+			</set>
+		</constructor-arg>
+	</bean>
+		
+	<bean id="DataBaseSQL" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+		<property name="url" value="jdbc:mysql://localhost/codel"/>
+		<property name="username" value="root"/>
+		<property name="password" value="subaru"/>
+	</bean>
+	
+	<bean id="mySessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="DataBaseSQL" />
+		<property name="mappingResources">
+			<list>
+				<value>domain/Address.hbm.xml</value>
+				<value>domain/Contact.hbm.xml</value>
+				<value>domain/ContactGroup.hbm.xml</value>
+				<value>domain/PhoneNumber.hbm.xml</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.hbm2ddl.auto">create</prop>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.cache.use_second_level_cache">true</prop>
+				<prop key="hibernate.cache.use_query_cache">true</prop>
+				<prop key="hibernate.generate_statistics">true</prop>
+				<prop key="hibernate.cache.provider.class">org.hibernate.cache.EhCacheProvider</prop>
+				<prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="mySessionFactory"/>
+	</bean>
+	<bean id="DAOContact" class="domain.DAOContact">
+		<property name="sessionFactory" ref="mySessionFactory"/>
+	</bean>
+	<bean id="DAOEntreprise" class="domain.DAOEntreprise">
+		<property name="sessionFactory" ref="mySessionFactory"/>
+	</bean>
+	<bean id="DAOGroup" class="domain.DAOGroup">
+		<property name="sessionFactory" ref="mySessionFactory"/>
+	</bean>
+	
+	<bean id="SuccesMessage" class="jsf.SuccesMessage"></bean>
+	<bean id="ErrorMessage" class="jsf.ErrorMessage"></bean>
+
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="get*" read-only="true"  />
+			<tx:method name="sav*" propagation="REQUIRED" />
+			<tx:method name="find*" read-only="true" />
+			<tx:method name="*" propagation="REQUIRED"  />
+		</tx:attributes>
+	</tx:advice>
+	
+
+	<aop:config>
+		<aop:advisor pointcut="execution(* domain.*.*(..))" advice-ref="txAdvice" />
+	</aop:config>
+	
+	<aop:config>
+		<aop:aspect id="LogContact" ref="contactLogAOP">
+			<aop:before pointcut="execution(* domain.Contact.getFirstName(..))" method="log" />
+		</aop:aspect>
+	</aop:config>
+	<bean id="contactLogAOP" class="domain.ContactAOP" />
+	
+</beans>

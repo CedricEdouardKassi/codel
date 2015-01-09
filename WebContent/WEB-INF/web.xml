@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>CODEL</display-name>
+
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  <listener>
+    <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+  </listener>
+
+  <welcome-file-list>
+    <!-- <welcome-file>index.htm</welcome-file> -->
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  
+  
+  
+  <servlet>
+    <description></description>
+    <display-name>AddContact</display-name>
+    <servlet-name>AddContact</servlet-name>
+    <servlet-class>servlet.AddContact</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddContact</servlet-name>
+    <url-pattern>/AddContact</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeleteContact</display-name>
+    <servlet-name>DeleteContact</servlet-name>
+    <servlet-class>servlet.DeleteContact</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteContact</servlet-name>
+    <url-pattern>/DeleteContact</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SearchContact</display-name>
+    <servlet-name>SearchContact</servlet-name>
+    <servlet-class>servlet.SearchContact</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchContact</servlet-name>
+    <url-pattern>/SearchContact</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UpdateContact</display-name>
+    <servlet-name>UpdateContact</servlet-name>
+    <servlet-class>servlet.UpdateContact</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateContact</servlet-name>
+    <url-pattern>/UpdateContact</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddEntreprise</display-name>
+    <servlet-name>AddEntreprise</servlet-name>
+    <servlet-class>servlet.AddEntreprise</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddEntreprise</servlet-name>
+    <url-pattern>/AddEntreprise</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UpdateEntreprise</display-name>
+    <servlet-name>UpdateEntreprise</servlet-name>
+    <servlet-class>servlet.UpdateEntreprise</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateEntreprise</servlet-name>
+    <url-pattern>/UpdateEntreprise</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddContactGroup</display-name>
+    <servlet-name>AddContactGroup</servlet-name>
+    <servlet-class>servlet.AddContactGroup</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddContactGroup</servlet-name>
+    <url-pattern>/AddContactGroup</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeleteContactGroup</display-name>
+    <servlet-name>DeleteContactGroup</servlet-name>
+    <servlet-class>servlet.DeleteContactGroup</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteContactGroup</servlet-name>
+    <url-pattern>/DeleteContactGroup</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddContactInstances</display-name>
+    <servlet-name>AddContactInstances</servlet-name>
+    <servlet-class>servlet.AddContactInstances</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddContactInstances</servlet-name>
+    <url-pattern>/AddContactInstances</url-pattern>
+  </servlet-mapping>
+  
+  
+  
+	<servlet>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.jsf</url-pattern>
+	</servlet-mapping>
+	<context-param>
+		<param-name>javax.faces.PROJECT_STAGE</param-name>
+		<param-value>Development</param-value>
+	</context-param>
+	  
+
+</web-app>

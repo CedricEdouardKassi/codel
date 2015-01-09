@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:f="http://java.sun.com/jsf/core"    
+   xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<f:view locale="#{Language.l}" ></f:view>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<link href="css/style.css" rel="stylesheet" type="text/css"/>
+	<title>#{msgs.home}</title>
+</h:head>
+<h:body>
+	<ul id="btnMenuHeader">
+		<li><h:form><h:commandLink value="#{msgs.addInstances}" action="#{AddDataInstancesAccess.check}" /></h:form></li>
+		<li><h:link value="#{msgs.addContact}" outcome="addContact" /></li>
+		<li><h:link value="#{msgs.addGroup}" outcome="addGroup" /></li>
+		<li><h:form><h:commandLink value="#{msgs.showGroups}" action="#{GetListGroupAccess.check}" /></h:form></li>
+		<li><h:link value="#{msgs.language}" outcome="language" /></li>
+	</ul>
+	<div id="search">
+		<h:form>
+			<h:inputText value="#{SearchAccess.term}" id="searchContactTerm" name="term" />
+			<h:selectOneMenu class="text" value="#{SearchAccess.searchBy}">
+			   <f:selectItem itemValue="firstName" itemLabel="#{msgs.firstName}" />
+			   <f:selectItem itemValue="lastName" itemLabel="#{msgs.lastName}" />	   
+			   <f:selectItem itemValue="email" itemLabel="#{msgs.email}" />							
+			</h:selectOneMenu>
+			<h:commandButton value="#{msgs.validate}" action="#{SearchAccess.check}" />
+		</h:form>
+	</div>
+	<h:dataTable value="#{SearchAccess.content}" var="contact" >
+	   <h:column>
+	   	<f:facet name="header">ID</f:facet>
+	   	#{contact.id}
+	   </h:column>
+	   <h:column>
+	   	<f:facet name="header">#{msgs.firstName}</f:facet>
+	   	<h:form>
+		   	<h:commandLink value="#{contact.firstName}" action="#{DisplayDataAccess.check}" >
+		   		<f:param name="id" value="#{contact.id}"/>
+		   	</h:commandLink>
+	   </h:form>
+	   </h:column>
+	   <h:column>
+	      <f:facet name="header">#{msgs.lastName}</f:facet>
+	   		#{contact.lastName}
+	   </h:column>
+	   <h:column>
+	      <f:facet name="header">#{msgs.email}</f:facet>
+	   		#{contact.email}
+	   </h:column>
+	   <h:column>
+	      <f:facet name="header">#{msgs.modify}</f:facet>
+	   		<h:form>
+	   			<h:commandButton styleClass="actionModify" value="#{msgs.modify}" action="#{ModifyDataAccess.check}">
+	   				<f:param name="id" value="#{contact.id}"/>
+	   			</h:commandButton>
+	   		</h:form>
+	   </h:column>
+	   <h:column>
+	      <f:facet name="header">#{msgs.delete}</f:facet>
+	   		<h:form>
+	   			<h:commandButton styleClass="actionDelete" value="#{msgs.delete}" action="#{DeleteDataAccess.check()}" >
+	   				<f:param name="id" value="#{contact.id}"/>
+	   			</h:commandButton>
+	   		</h:form>
+	   </h:column>
+	</h:dataTable>
+	<h:outputText escape="false" value="&lt;div class='error'&gt;Il y a aucun contact. &lt;/div&gt;" rendered="#{SearchAccess.content.isEmpty()}"></h:outputText>
+</h:body>
+</html>

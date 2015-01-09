@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="domain">
+  <class name="Contact" table="Contact_Table">
+  	<cache usage="read-write" />
+  	<id name="id" type="long" column="ID_CONTACT" >
+  		<generator class="increment"/>
+	</id>
+	<timestamp name="version" access="field" />
+	<property name="firstName" type="string" />
+	<property name="lastName" type="string" />
+	<property name="email" type="string" />
+	<many-to-one name="address" class="Address" column="address" cascade="all-delete-orphan" unique="true" not-null="true"  />
+	<set name="phones" inverse="true" cascade="all-delete-orphan" lazy="false">
+            <key column="ID_CONTACT" not-null="true" />
+            <one-to-many class="PhoneNumber"/>
+    </set>
+	<set name="books" table="Contact_Books_Table" cascade="save-update" lazy="false" optimistic-lock="false">
+            <key column="ID_CONTACT"  />
+            <many-to-many column="ID_CONTACTGROUP" class="ContactGroup"/>
+    </set>
+	<joined-subclass name="Entreprise" table="Entreprise_Table">
+		<key column="ID_CONTACT" />
+		<property name="numSiret" column="numSiret" />
+	</joined-subclass>
+  </class>
+  
+</hibernate-mapping>
